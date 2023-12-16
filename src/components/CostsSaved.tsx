@@ -26,9 +26,8 @@ export const CostsSaved: React.FunctionComponent<ICostsSavedProps> = (props: Rea
 
     return (
         <>
-            <div className={mergeStyles(AnimationStyles.fadeIn100)}>
-                How much money can you save by automating a task?
-                <br />
+            <div className={mergeStyles(AnimationStyles.slideDownIn20, {margin: "1em"})}>
+                <Text variant='xLarge'>How much money can you save by automating a task?</Text>
                 <br />
                 <Text>In this example we take a look at the "value" of those small optimizations, and calculate the actual savings you're looking into, this will give you some idea as to wether it's worth the investment or not</Text>
                 <br />

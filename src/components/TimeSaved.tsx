@@ -11,14 +11,16 @@ export const TimeSaved: React.FunctionComponent<ITimeSavedProps> = (props: React
     return (
         <div className={mergeStyles(AnimationStyles.slideDownIn20, { padding: "1em" })}>
 
-            <div style={{ textAlign: 'center', margin: "0px 10px" }}>
-                <Text variant='large'>How long can you work on making a routine task more efficient before you're spending more time than you save?</Text>
-                <Text variant='medium'> (Across five years)</Text>
-            </div>
 
+            <Text variant='xLarge'>The inspiration</Text>
             <br />
-            <div style={{ display: 'flex' }}>
-                <div style={{ textAlign: "center", writingMode: "vertical-lr", transform: "rotate(180deg)"}}> How much time you shave off</div>
+            <Text>The original idea for this site stems from an very old xkcd meme that I would often refer to when thinking about building a script to automate a task, and I wanted everyone to be able to enjoy the awesomeness, so I built this entire site that'll do all the math for you!</Text>
+            <br />
+            <br />
+
+            <Text variant='large'>How long can you work on making a routine task more efficient before you're spending more time than you save?</Text>
+            <div style={{ display: 'flex' }}>   
+                <div style={{ textAlign: "center", writingMode: "vertical-lr", transform: "rotate(180deg)" }}> How much time you shave off</div>
                 <div style={{ flexGrow: 1 }}>
                     <div style={{ textAlign: "center" }}>How often you do the task</div>
                     <div className='Table' style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>

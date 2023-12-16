@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { getCurrencySymbol, getCurrentLocale } from '../assets/Currency';
-import { Text, TextField } from '@fluentui/react';
+import { AnimationStyles, Link, Text, TextField, mergeStyles } from '@fluentui/react';
 import { hoursToPrettyString } from '../assets/TimeParser';
 import useQuery from '../hooks/useQuery';
 
@@ -19,14 +19,16 @@ export const BreakEvenCalculator: React.FunctionComponent<IBreakEvenCalculatorPr
 
     const employeeHourlyCost = EmployeeCost / (DailyHours * WorkingDays)
     return (
-        <div style={{ maxWidth: "500px", margin: 10 }}>
+        <div className={mergeStyles(AnimationStyles.slideDownIn20, { maxWidth: "500px", margin: "1em" })}>
+            
             <Text variant='xLarge'>Break even calculator</Text>
-
             <br />
-            <Text variant='medium'>Let's say you're considering giving your employees a Microsoft Copilot license, you would want to know when you can expect that license cost to break even, that's exactly what this tool will help you with!</Text>
+            <Text>Let's say you're considering giving your employees a Microsoft Copilot license, you would want to know when you can expect that license cost to break even, that's exactly what this tool will help you with!</Text>
             <br />
             <br />
             <Text>Simply enter the monthly cost of whatever you're considering, and we'll calculate the breakeven point for you, if you want to change the employee info, simply press the gear icon in the top right</Text>
+            <br />
+            <Text>Full credit for the idea behind this goes to <Link href='https://twitter.com/ChrisO_Brien' target='_blank'>Chris O'Brien</Link></Text>
             <br />
             <br />
 
