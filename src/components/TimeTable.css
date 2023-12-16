@@ -1,0 +1,12 @@
+.Table {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: .75em;
+}
+
+.Table > div {
+    border: 1px solid;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0.1em;
+}
