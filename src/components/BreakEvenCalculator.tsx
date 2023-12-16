@@ -4,14 +4,14 @@ import { AnimationStyles, Link, Text, TextField, mergeStyles } from '@fluentui/r
 import { hoursToPrettyString } from '../assets/TimeParser';
 import useQuery from '../hooks/useQuery';
 
-export interface IBreakEvenCalculatorProps {
+export interface IBreakevenCalculatorProps {
     DailyHours: number;
     WorkingDays: number;
     EmployeeCost: number;
     Currency: string;
 }
 
-export const BreakEvenCalculator: React.FunctionComponent<IBreakEvenCalculatorProps> = (props: React.PropsWithChildren<IBreakEvenCalculatorProps>) => {
+export const BreakevenCalculator: React.FunctionComponent<IBreakevenCalculatorProps> = (props: React.PropsWithChildren<IBreakevenCalculatorProps>) => {
     const { DailyHours, EmployeeCost, WorkingDays, Currency } = props;
     const [BreakevenCost, SetBreakevenCost] = useQuery<number>("BreakevenCost",30);
 
@@ -21,7 +21,7 @@ export const BreakEvenCalculator: React.FunctionComponent<IBreakEvenCalculatorPr
     return (
         <div className={mergeStyles(AnimationStyles.slideDownIn20, { maxWidth: "500px", margin: "1em" })}>
             
-            <Text variant='xLarge'>Break even calculator</Text>
+            <Text variant='xLarge'>Breakeven calculator</Text>
             <br />
             <Text>Let's say you're considering giving your employees a Microsoft Copilot license, you would want to know when you can expect that license cost to break even, that's exactly what this tool will help you with!</Text>
             <br />

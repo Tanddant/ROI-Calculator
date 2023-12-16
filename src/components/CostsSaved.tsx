@@ -19,14 +19,14 @@ export const CostsSaved: React.FunctionComponent<ICostsSavedProps> = (props: Rea
     const [SystemLifetime, SetSystemLifetime] = useQuery("SystemLifetime", 5);
 
     const XAxis: IKeyValue[] = [{ key: "50/Day", value: 50 }, { key: "5/Day", value: 5 }, { key: "Daily", value: 1 }, { key: "Weekly", value: 1 / 5 }, { key: "Monthly", value: 1 / (WorkingDays / 12) }, { key: "Yearly", value: 1 / WorkingDays }]
-    const YAxis: IKeyValue[] = [{ key: "1 Second", value: 1 / 60 / 60 }, { key: "5 Seconds", value: 5 / 60 / 60 }, { key: "30 Seconds", value: 30 / 60 / 60 }, { key: "1 Minute", value: 1 / 60 }, { key: "5 Minutes", value: 5 / 60 }, { key: "10 Minutes", value: 10 / 60 }, { key: "30 Minutes", value: 30 / 60 }]
+    const YAxis: IKeyValue[] = [{ key: "1 Second", value: 1 / 60 / 60 }, { key: "5 Seconds", value: 5 / 60 / 60 }, { key: "30 Seconds", value: 30 / 60 / 60 }, { key: "1 Minute", value: 1 / 60 }, { key: "5 Minutes", value: 5 / 60 }, { key: "10 Minutes", value: 10 / 60 }, { key: "30 Minutes", value: 30 / 60 }, { key: "1 Hour", value: 1 },{ key: "6 Hours", value: 6 }]
 
     const formatter = Intl.NumberFormat(getCurrentLocale(), { style: 'currency', currency: Currency });
     const EmployeeHourlyCost = EmployeeCost / (DailyHours * WorkingDays);
 
     return (
         <>
-            <div className={mergeStyles(AnimationStyles.slideDownIn20, {margin: "1em"})}>
+            <div className={mergeStyles(AnimationStyles.slideDownIn20, { margin: "1em" })}>
                 <Text variant='xLarge'>How much money can you save by automating a task?</Text>
                 <br />
                 <Text>In this example we take a look at the "value" of those small optimizations, and calculate the actual savings you're looking into, this will give you some idea as to wether it's worth the investment or not</Text>

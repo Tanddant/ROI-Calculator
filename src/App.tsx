@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import { ActionButton, Text, getTheme, Nav, Icon, Link, AnimationStyles, mergeStyles, Dialog, TextField, Slider, Dropdown, DialogFooter, PrimaryButton, Stack } from '@fluentui/react';
+import { ActionButton, Text, getTheme, Nav, Icon, Link, AnimationStyles, mergeStyles, Dialog, TextField, Slider, Dropdown, DialogFooter, PrimaryButton, Stack, Label } from '@fluentui/react';
 import { NavigationKey } from './models/NavigationKey';
 import useQuery from './hooks/useQuery';
 import { TimeSaved } from './components/TimeSaved';
 import { Home } from './components/Home';
 import { CostsSaved } from './components/CostsSaved';
 import { CurrencyOptions, getCurrencySymbol, getCurrentLocale } from './assets/Currency';
-import { BreakEvenCalculator } from './components/BreakEvenCalculator';
+import { BreakevenCalculator } from './components/BreakevenCalculator';
 
 export interface IAppProps { }
 
@@ -58,7 +58,7 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
                   url: "",
                   key: NavigationKey.Breakeven,
                 }
-              ],
+                ],
               }
             ]}
           />
@@ -79,8 +79,15 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
                   options={CurrencyOptions.map(x => ({ key: x, text: x }))}
                   onChange={(_, item) => SetCurrency(item?.key as string)}
                 />
-                {CurrencyOptions.indexOf(Currency) == -1 && <TextField label='Currency' value={Currency} onChange={(_, val) => SetCurrency(val as string)} />}
-                <TextField label="Employee cost/year" suffix={getCurrencySymbol(getCurrentLocale(), Currency)} value={EmployeeCost as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string))} type='number' />
+
+                <br />
+                <Stack tokens={{ childrenGap: 5 }} >
+                  <Label>Employee cost (fill one)</Label>
+                  <TextField label="Yearly" value={EmployeeCost as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string))} type='number' suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                  <TextField label="Monthly" value={(EmployeeCost / 12) as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string) * 12)} type='number' suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                  <TextField label="Daily" value={(EmployeeCost / WorkingDays) as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string) * WorkingDays)} type='number' suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                  <TextField label="Hourly" value={(EmployeeCost / WorkingDays / WorkingHours) as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string) * WorkingDays * WorkingHours)} type='number' suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                </Stack>
               </Stack>
 
               <DialogFooter>
@@ -91,7 +98,7 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
             {ViewKey === NavigationKey.Home && <Home />}
             {ViewKey === NavigationKey.TimeSaved && <TimeSaved />}
             {ViewKey === NavigationKey.CostSaved && <CostsSaved DailyHours={WorkingHours} EmployeeCost={EmployeeCost} WorkingDays={WorkingDays} Currency={Currency} />}
-            {ViewKey === NavigationKey.Breakeven && <BreakEvenCalculator DailyHours={WorkingHours} EmployeeCost={EmployeeCost} WorkingDays={WorkingDays} Currency={Currency} />}
+            {ViewKey === NavigationKey.Breakeven && <BreakevenCalculator DailyHours={WorkingHours} EmployeeCost={EmployeeCost} WorkingDays={WorkingDays} Currency={Currency} />}
           </div>
         </div>
 
