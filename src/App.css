@@ -10,8 +10,8 @@ body {
   background-color: #282c34;
   min-height: 100dvh;
   min-width: 100dvw;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -24,17 +24,17 @@ body {
 
 .App-content {
   width: 100%;
-
+  display: flex;
 }
 
 @media (max-aspect-ratio: 3/4) {
-  .App-content div{
-    min-width: 10px;;
+  .App-content {
+    flex-direction: column;
   }
 }
+
 @media (min-aspect-ratio: 4/3) {
-  .App-content {
-    display: grid;
-    grid-template-columns: minmax(150px, 20%) 1fr;
+  .Nav {
+    max-width: 280px;
   }
 }

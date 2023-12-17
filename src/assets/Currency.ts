@@ -173,7 +173,7 @@ export const getCurrencySymbol = (locale: string, currency: string) => {
 }
 
 export const getCurrentLocale = () => {
-    if (navigator.languages != undefined)
+    if (navigator.languages !== undefined && navigator.language !== null)
         return navigator.languages[0];
     return navigator.language;
 }

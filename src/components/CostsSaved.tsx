@@ -29,27 +29,27 @@ export const CostsSaved: React.FunctionComponent<ICostsSavedProps> = (props: Rea
             <div className={mergeStyles(AnimationStyles.slideDownIn20, { margin: "1em" })}>
                 <Text variant='xLarge'>How much money can you save by automating a task?</Text>
                 <br />
-                <Text>In this example we take a look at the "value" of those small optimizations, and calculate the actual savings you're looking into, this will give you some idea as to wether it's worth the investment or not</Text>
+                <Text>I often find the numbers hard to understand when we're talking about savings from even small time optimizations, this table will crunch the numbers, and tell you exactly how much you can spend on your next optimization, and still make money.</Text>
                 <br />
-                <br />
+                <hr />
 
 
-                <div style={{ display: 'flex', width: "100%" }}>
-                    <Slider styles={{ root: { flexGrow: 1 } }} value={SystemLifetime} step={1} onChange={val => SetSystemLifetime(val)} label='System life time (years)' min={1} max={15} />
-                    <TextField styles={{ root: { flexGrow: 1 } }} type='number' value={NumberOfEmployees as any as string} label='Number of employees' onChange={(_, val) => SetNumberOfEmployees(parseInt(val as string))} />
+                <div style={{ display: 'flex', width: "100%", flexWrap: "wrap" }}>
+                    <Slider styles={{ root: { flexGrow: 1, minWidth: 200 } }} value={SystemLifetime} step={1} onChange={val => SetSystemLifetime(val)} label='System life time (years)' min={1} max={15} />
+                    <TextField styles={{ root: { flexGrow: 1, minWidth: 200 } }} type='number' value={NumberOfEmployees as any as string} label='Number of employees' onChange={(_, val) => SetNumberOfEmployees(parseInt(val as string))} />
                 </div>
 
                 <div style={{ display: 'flex', margin: "10px" }}>
                     <div style={{ textAlign: "center", writingMode: "vertical-lr", transform: "rotate(180deg)" }}> How much time you shave off</div>
-                    <div style={{ flexGrow: 1 }}>
+                    <div style={{ flexGrow: 1, maxWidth: "100%", overflowX: "auto" }}>
                         <div style={{ textAlign: "center" }}>How often you do the task</div>
                         <div className='Table' style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
-                            <div></div>
-                            {XAxis.map((header) => <div><b>{header.key}</b></div>)}
+                            <div className='Cell'></div>
+                            {XAxis.map((header) => <div className='Cell Header'>{header.key}</div>)}
 
                             {YAxis.map((row, rowIndex) => {
                                 return <>
-                                    <div><b>{YAxis[rowIndex].key}</b></div>
+                                    <div className='Cell Header'>{YAxis[rowIndex].key}</div>
                                     {XAxis.map((column) => {
 
                                         const SavedHours = column.value * row.value;
@@ -58,9 +58,9 @@ export const CostsSaved: React.FunctionComponent<ICostsSavedProps> = (props: Rea
                                         const TotalSaving = NumberOfTimesExecuted * (HoursToDoTask * EmployeeHourlyCost) * NumberOfEmployees
 
                                         if (SavedHours > DailyHours)
-                                            return <div style={{ backgroundColor: 'darkgray' }}>N/A</div>
+                                            return <div className='Cell Inactive'></div>
 
-                                        return <div style={{ textAlign: "right" }}>{formatter.format(TotalSaving)}</div>;
+                                        return <div className='Cell'>{formatter.format(TotalSaving)}</div>;
                                     })}
                                 </>
                             })}

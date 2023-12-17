@@ -8,6 +8,7 @@ import { Home } from './components/Home';
 import { CostsSaved } from './components/CostsSaved';
 import { CurrencyOptions, getCurrencySymbol, getCurrentLocale } from './assets/Currency';
 import { BreakevenCalculator } from './components/BreakevenCalculator';
+import { Navigation } from './assets/Navigation';
 
 export interface IAppProps { }
 
@@ -25,7 +26,7 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
     <>
       <div className="App">
         <div className={mergeStyles(AnimationStyles.fadeIn100, "App-header")} style={{ background: theme.palette.themeTertiary }}>
-          <Text variant='xxLarge' style={{ margin: "auto 10px" }}> <Icon iconName='AllCurrency' />&nbsp;ROI Calculator</Text>
+          <Text variant='xxLarge' style={{ margin: "auto 10px" }} onClick={() => SetViewKey(NavigationKey.Home)}> <Icon iconName='AllCurrency' />&nbsp;ROI Calculator</Text>
           <div style={{ display: "flex", justifyContent: 'flex-end' }}>
             <ActionButton iconProps={{ iconName: "Settings" }} onClick={() => setShowSettings(true)} />
           </div>
@@ -33,36 +34,12 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
 
         <div className='App-content'>
           <Nav
+            className='Nav'
             onLinkClick={(_, item) => { SetViewKey(item?.key as NavigationKey) }}
             selectedKey={ViewKey as string}
-            groups={[
-              {
-                name: '🏠',
-                links: [{
-                  name: "Home",
-                  url: "",
-                  key: NavigationKey.Home,
-                },
-                {
-                  name: "Time to automate",
-                  url: "",
-                  key: NavigationKey.TimeSaved,
-                },
-                {
-                  name: "Time saved",
-                  url: "",
-                  key: NavigationKey.CostSaved,
-                },
-                {
-                  name: "Breakeven calculator",
-                  url: "",
-                  key: NavigationKey.Breakeven,
-                }
-                ],
-              }
-            ]}
+            groups={Navigation}
           />
-          <div>
+          <div style={{ flexGrow: 1, overflowX: 'hidden'}}>
 
             <Dialog
               hidden={!showSettings}
@@ -91,7 +68,7 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
               </Stack>
 
               <DialogFooter>
-                <PrimaryButton onClick={() => setShowSettings(false)} text="Save" />
+                <PrimaryButton onClick={() => setShowSettings(false)} text="Close" />
               </DialogFooter>
             </Dialog>
 
@@ -100,10 +77,10 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
             {ViewKey === NavigationKey.CostSaved && <CostsSaved DailyHours={WorkingHours} EmployeeCost={EmployeeCost} WorkingDays={WorkingDays} Currency={Currency} />}
             {ViewKey === NavigationKey.Breakeven && <BreakevenCalculator DailyHours={WorkingHours} EmployeeCost={EmployeeCost} WorkingDays={WorkingDays} Currency={Currency} />}
           </div>
-        </div>
 
-        <div style={{ textAlign: 'center' }}>
-          <Text>&copy; {new Date().getFullYear()} - Dan Toft - <Link href='https://github.com/Tanddant/ROI-Calculator'>Open Source</Link></Text>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: "auto", marginBottom: "1em" }}>
+          <Text>&copy; {new Date().getFullYear()} - <Link href='https://dan-toft.dk/' target='_blank'>Dan Toft</Link> - <Link href='https://github.com/Tanddant/ROI-Calculator'>Source code 🧑‍💻</Link></Text>
         </div>
 
       </div >

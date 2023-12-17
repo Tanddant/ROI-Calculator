@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const GetQueryValue = (key: string) => {
     const query = new URLSearchParams(window.location.search);

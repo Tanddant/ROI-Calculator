@@ -1,34 +1,40 @@
 import * as React from 'react';
-import { Text, mergeStyles, AnimationStyles } from '@fluentui/react';
+import { Text, mergeStyles, AnimationStyles, Link, Icon } from '@fluentui/react';
 
 export interface IHomeProps { }
 
 export const Home: React.FunctionComponent<IHomeProps> = (props: React.PropsWithChildren<IHomeProps>) => {
     return (
         <>
-            <div className={mergeStyles(AnimationStyles.slideDownIn20, { textAlign: 'center', maxWidth: "75%", margin: "auto" })}>
-                Hello there 👋
+            <div className={mergeStyles(AnimationStyles.slideDownIn20, { margin: "auto", padding: "1em" })}>
+                <Text variant="xxLarge">Hello there!</Text>
                 <br />
                 <br />
-                <Text variant='large'>Welcome to the ROI Calculator</Text>
+                <Text variant='large'>Welcome to my little hobby project 🙌 </Text>
+                <br />
+                <br />
+
                 <Text>
+                    The goal of this website is not to create the most advanced ROI calculator ever,
+                    nor was it to create a tool that businesses should rely on.
                     <br />
-                    This is a simple webpage to help you calculate if an investment in your next IT Project is worth it
                     <br />
-                    Now full disclosure, I'm not a financial advisor, and I'm not a mathematician, actually I'm an IT consultant.
+
+                    Instead I simply wanted to create "the tool I need", and with some inspiration from <Link href='https://xkcd.com/1205/' target='_blank'>xkcd </Link>
+                    and a session at ESPC by <Link href='https://twitter.com/ChrisO_Brien' target='_blank'>Chris O'Brien</Link> talking about Microsoft Copilot, and the return on investment there.
                     <br />
-                    I simply made this out of curiosity and to help my client make better decisions.
                     <br />
-                    What really pushed me was the announcement of Microsoft Copilot, and it being priced at USD $30/month/user, and trying to figure out if it was worth it.
+
+                    I decided to spend a weekend building this little site, that groups together some of the visualization/calculations that I like to use when I'm trying to figure out if a project is worth it.
+
                     <br />
-                    In the navigation bar you can find a few different pages, that're essentially just different ways of seeing the ROI.
                     <br />
-                    You can press the settings button in the top right corner to change the base values, such as how many days you work a year, and how many hours you work a day.
-                    <br />
-                    Hope you find it useful 🙌
-                    <br />
-                    - Dan
+
+                    You can edit all the variables that are used in the calculations, on the top right of the page, you'll see a <Icon iconName='settings' />-button, press that and you're off to the races.
                 </Text>
+                <br />
+                <br />
+                <Text variant='large'>I hope you find some use in the tools<br />- Dan 👋</Text>
             </div>
         </>
     );

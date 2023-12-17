@@ -1,4 +1,4 @@
-import { loadTheme, createTheme, ITheme } from '@fluentui/react';
+import { createTheme } from '@fluentui/react';
 
 const ReactTheme = {
   palette: {

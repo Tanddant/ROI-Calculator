@@ -4,9 +4,22 @@
     font-size: .75em;
 }
 
-.Table > div {
+
+.Cell {
     border: 1px solid;
     box-sizing: border-box;
     text-align: center;
-    padding: 0.1em;
+    padding: 0.5em;
+    text-align: right;
+    min-width: auto;
+    white-space: nowrap;
+}
+
+.Header {
+    font-weight: bold;
+    text-align: center;
+}
+
+.Inactive {
+    background-color: darkgray;
 }
