@@ -2,6 +2,12 @@ import { useState } from 'react';
 
 const GetQueryValue = (key: string) => {
     const query = new URLSearchParams(window.location.search);
+    try {
+        const value = JSON.parse(query.get(key) as any);
+        return value;
+    } catch (error) {
+        // Ignore
+    }
     return query.get(key);
 }
 

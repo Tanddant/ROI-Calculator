@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { ActionButton, Text, getTheme, Nav, Icon, Link, AnimationStyles, mergeStyles, Dialog, TextField, Slider, Dropdown, DialogFooter, PrimaryButton, Stack, Label, Pivot, PivotItem } from '@fluentui/react';
+import { ActionButton, Text, getTheme, Nav, Icon, Link, AnimationStyles, mergeStyles, Dialog, Slider, Dropdown, DialogFooter, PrimaryButton, Stack, Label, Pivot, PivotItem } from '@fluentui/react';
 import { NavigationKey } from './models/NavigationKey';
 import useQuery from './hooks/useQuery';
 import { TimeSaved } from './components/TimeSaved';
@@ -9,6 +9,7 @@ import { CostsSaved } from './components/CostsSaved';
 import { CurrencyOptions, getCurrencySymbol, getCurrentLocale } from './assets/Currency';
 import { BreakevenCalculator } from './components/BreakevenCalculator';
 import { Navigation } from './assets/Navigation';
+import { FormattedNumberField } from './components/FormattedNumberField';
 
 export interface IAppProps { }
 
@@ -71,10 +72,10 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
                 <br />
                 <Stack tokens={{ childrenGap: 5 }} >
                   <Label>Employee cost (fill one)</Label>
-                  <TextField label="Yearly" value={EmployeeCost as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string))} type='number' suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
-                  <TextField label="Monthly" value={(EmployeeCost / 12) as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string) * 12)} type='number' suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
-                  <TextField label="Daily" value={(EmployeeCost / WorkingDays) as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string) * WorkingDays)} type='number' suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
-                  <TextField label="Hourly" value={(EmployeeCost / WorkingDays / WorkingHours) as any as string} onChange={(_, val) => SetEmployeeCost(parseFloat(val as string) * WorkingDays * WorkingHours)} type='number' suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                  <FormattedNumberField label="Yearly" currentValue={EmployeeCost} onValueChanged={val => SetEmployeeCost(val)} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                  <FormattedNumberField label="Monthly" currentValue={(EmployeeCost / 12)} onValueChanged={val => SetEmployeeCost(val * 12)} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                  <FormattedNumberField label="Daily" currentValue={(EmployeeCost / WorkingDays)} onValueChanged={val => SetEmployeeCost(val * WorkingDays)} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                  <FormattedNumberField label="Hourly" currentValue={(EmployeeCost / WorkingDays / WorkingHours)} onValueChanged={val => SetEmployeeCost(val * WorkingDays * WorkingHours)} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
                 </Stack>
               </Stack>
 

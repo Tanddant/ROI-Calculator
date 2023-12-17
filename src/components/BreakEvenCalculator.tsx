@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { getCurrencySymbol, getCurrentLocale } from '../assets/Currency';
-import { AnimationStyles, Icon, Link, Text, TextField, mergeStyles } from '@fluentui/react';
+import { AnimationStyles, Icon, Link, Text, mergeStyles } from '@fluentui/react';
 import { hoursToPrettyString } from '../assets/TimeParser';
 import useQuery from '../hooks/useQuery';
+import { FormattedNumberField } from './FormattedNumberField';
 
 export interface IBreakevenCalculatorProps {
     DailyHours: number;
@@ -31,7 +32,7 @@ export const BreakevenCalculator: React.FunctionComponent<IBreakevenCalculatorPr
             <br />
 
             <div style={{maxWidth: 960}}>
-                <TextField label='Price/month' type='number' value={BreakevenCost as any as string} onChange={(_, val) => SetBreakevenCost(parseInt(val as string))} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                <FormattedNumberField label='Price/month' type='number' currentValue={BreakevenCost} onValueChanged={val => SetBreakevenCost(val)} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
                 <br />
                 <Text>
                     Employee info:
