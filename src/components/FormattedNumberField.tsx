@@ -42,7 +42,7 @@ export const FormattedNumberField: React.FunctionComponent<IFormattedNumberField
         }}
 
         onChange={(_, val) => {
-            set_curVal(val +"");
+            set_curVal(val + "");
             if (onValueChanged != null) {
                 if (val === "") {
                     onValueChanged(0);
