@@ -19,36 +19,37 @@ export const BreakevenCalculator: React.FunctionComponent<IBreakevenCalculatorPr
 
     const employeeHourlyCost = EmployeeCost / (DailyHours * WorkingDays)
     return (
-        <div className={mergeStyles(AnimationStyles.slideDownIn20, { maxWidth: "960px", margin: "1em" })}>
+        <div className={mergeStyles(AnimationStyles.slideDownIn20, { margin: "1em" })}>
 
             <Text variant='xLarge'>Breakeven calculator</Text>
             <br />
             <Text>Let's say you're considering giving your employees a Microsoft Copilot license, you would want to know when you can expect that license cost to breakeven, that's exactly what this tool will help you with!</Text>
             <br />
             <hr />
-            <Text>Simply enter the monthly cost of whatever you're considering, and it'll calculate the breakeven point for you, if you want to change the employee info, simply press the <Icon iconName='settings'/>-icon in the top right</Text>
+            <Text>Simply enter the monthly cost of whatever you're considering, and it'll calculate the breakeven point for you, if you want to change the employee info, simply press the <Icon iconName='settings' />-icon in the top right</Text>
             <br />
             <br />
 
+            <div style={{maxWidth: 960}}>
+                <TextField label='Price/month' type='number' value={BreakevenCost as any as string} onChange={(_, val) => SetBreakevenCost(parseInt(val as string))} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+                <br />
+                <Text>
+                    Employee info:
+                    <div style={{ display: 'grid', gridTemplateColumns: "1fr 1fr" }}>
+                        <div>Total cost to company</div><div>{formatter.format(EmployeeCost)}</div>
+                        <div>Hourly const</div><div>{formatter.format(employeeHourlyCost)}</div>
+                        <div>Daily cost</div><div>{formatter.format(EmployeeCost / WorkingDays)}</div>
+                        <div>Weekly cost</div><div>{formatter.format(EmployeeCost / WorkingDays * 5)}</div>
+                        <div>Monthly cost</div><div>{formatter.format(EmployeeCost / 12)}</div>
+                    </div>
+                </Text>
 
-            <TextField label='Price/month' type='number' value={BreakevenCost as any as string} onChange={(_, val) => SetBreakevenCost(parseInt(val as string))} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
-            <br />
-            <Text>
-                Employee info:
-                <div style={{ display: 'grid', gridTemplateColumns: "1fr 1fr" }}>
-                    <div>Total cost to company</div><div>{formatter.format(EmployeeCost)}</div>
-                    <div>Hourly const</div><div>{formatter.format(employeeHourlyCost)}</div>
-                    <div>Daily cost</div><div>{formatter.format(EmployeeCost / WorkingDays)}</div>
-                    <div>Weekly cost</div><div>{formatter.format(EmployeeCost / WorkingDays * 5)}</div>
-                    <div>Monthly cost</div><div>{formatter.format(EmployeeCost / 12)}</div>
-                </div>
-            </Text>
-
-            <br />
-            <Text variant='xLarge'>Breakeven point: {hoursToPrettyString((BreakevenCost / employeeHourlyCost))}</Text>
-            <br />
-            <br />
-            <Text variant='small'>Full credit for the idea behind this calculator goes to <Link href='https://twitter.com/ChrisO_Brien' target='_blank'>Chris O'Brien</Link></Text>
+                <br />
+                <Text variant='xLarge'>Breakeven point: {hoursToPrettyString((BreakevenCost / employeeHourlyCost))}</Text>
+                <br />
+                <br />
+                <Text variant='small'>Full credit for the idea behind this calculator goes to <Link href='https://twitter.com/ChrisO_Brien' target='_blank'>Chris O'Brien</Link></Text>
+            </div>
         </div>
     );
 };

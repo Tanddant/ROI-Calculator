@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { ActionButton, Text, getTheme, Nav, Icon, Link, AnimationStyles, mergeStyles, Dialog, TextField, Slider, Dropdown, DialogFooter, PrimaryButton, Stack, Label } from '@fluentui/react';
+import { ActionButton, Text, getTheme, Nav, Icon, Link, AnimationStyles, mergeStyles, Dialog, TextField, Slider, Dropdown, DialogFooter, PrimaryButton, Stack, Label, Pivot, PivotItem } from '@fluentui/react';
 import { NavigationKey } from './models/NavigationKey';
 import useQuery from './hooks/useQuery';
 import { TimeSaved } from './components/TimeSaved';
@@ -33,13 +33,23 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
         </div>
 
         <div className='App-content'>
+
           <Nav
-            className='Nav'
+            className='Nav HideOnMobile'
             onLinkClick={(_, item) => { SetViewKey(item?.key as NavigationKey) }}
             selectedKey={ViewKey as string}
-            groups={Navigation}
+            groups={[Navigation]}
           />
-          <div style={{ flexGrow: 1, overflowX: 'hidden'}}>
+
+          <Pivot
+            className='HideOnDesktop'
+            onLinkClick={(item) => { SetViewKey(item?.props.itemKey as NavigationKey) }}
+            overflowBehavior='menu'
+          >
+            {Navigation.links.map(item => <PivotItem headerText={item.name} itemKey={item.key} key={item.key} />)}
+          </Pivot>
+
+          <div style={{ flexGrow: 1, overflowX: 'hidden' }}>
 
             <Dialog
               hidden={!showSettings}

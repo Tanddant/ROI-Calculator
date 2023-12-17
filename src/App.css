@@ -31,10 +31,18 @@ body {
   .App-content {
     flex-direction: column;
   }
+
+  .HideOnMobile {
+    display: none;
+  }
 }
 
 @media (min-aspect-ratio: 4/3) {
   .Nav {
     max-width: 280px;
+  }
+
+  .HideOnDesktop {
+    display: none;
   }
 }
