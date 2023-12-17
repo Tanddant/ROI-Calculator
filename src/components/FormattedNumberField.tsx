@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITextFieldProps, TextField } from '@fluentui/react';
-import { getCurrentLocale, parseLocaleNumber } from '../assets/Currency';
+import { LocalizedNumberParser, getCurrentLocale } from '../assets/Currency';
 
 const ALLOWED_KEY_INPUTS = [".", ",", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab", "F5"];
 
@@ -12,7 +12,7 @@ export interface IFormattedNumberFieldProps extends Omit<Omit<Omit<Omit<Omit<Omi
 export const FormattedNumberField: React.FunctionComponent<IFormattedNumberFieldProps> = (props: React.PropsWithChildren<IFormattedNumberFieldProps>) => {
     const { onValueChanged, currentValue } = props;
     const [isEdit, setIsEdit] = React.useState<boolean>(false);
-    const [_curVal, set_curVal] = React.useState<string>();
+    const [_curVal, set_curVal] = React.useState<string>(currentValue + "");
 
     const displayValue = currentValue != null ? new Intl.NumberFormat(getCurrentLocale()).format(currentValue) : "-";
 
@@ -20,8 +20,6 @@ export const FormattedNumberField: React.FunctionComponent<IFormattedNumberField
         {...props}
         onFocus={(ev) => {
             if (onValueChanged != null) {
-                const parsed = parseLocaleNumber(currentValue + "", getCurrentLocale()) + ""
-                set_curVal(parsed);
                 setIsEdit(true)
                 ev.target.selectionStart = ev.target.selectionEnd = ev.target.value.length;
             }
@@ -36,7 +34,7 @@ export const FormattedNumberField: React.FunctionComponent<IFormattedNumberField
             if (e.ctrlKey && e.key === "a")
                 return;
 
-            if(e.key === "Enter")
+            if (e.key === "Enter")
                 (e.target as HTMLInputElement).blur();
 
             if (!ALLOWED_KEY_INPUTS.some((key) => e.key === key))
@@ -44,12 +42,12 @@ export const FormattedNumberField: React.FunctionComponent<IFormattedNumberField
         }}
 
         onChange={(_, val) => {
-            set_curVal(val);
+            set_curVal(val +"");
             if (onValueChanged != null) {
                 if (val === "") {
                     onValueChanged(0);
                 } else {
-                    const parsed: number = parseLocaleNumber(val as string, getCurrentLocale());
+                    const parsed: number = new LocalizedNumberParser(getCurrentLocale()).parse(val + "");
                     onValueChanged(parsed);
                 }
             }

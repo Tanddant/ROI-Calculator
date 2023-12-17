@@ -1,11 +1,11 @@
+import { AnimationStyles, Dropdown, ResponsiveMode, Slider, Text, mergeStyles } from '@fluentui/react';
 import * as React from 'react';
-import './TimeTable.css'
+import { getCurrentLocale } from '../assets/Currency';
+import { hoursToPrettyString } from '../assets/TimeParser';
 import useQuery from '../hooks/useQuery';
 import { IKeyValue } from '../models/IKeyValue';
-import { getCurrentLocale } from '../assets/Currency';
-import { AnimationStyles, Checkbox, Dropdown, ResponsiveMode, Slider, Text, Toggle, mergeStyles } from '@fluentui/react';
 import { FormattedNumberField } from './FormattedNumberField';
-import { hoursToPrettyString } from '../assets/TimeParser';
+import './TimeTable.css';
 
 export interface ICostsSavedProps {
     DailyHours: number;

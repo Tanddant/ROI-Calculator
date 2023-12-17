@@ -173,22 +173,42 @@ export const getCurrencySymbol = (locale: string, currency: string) => {
 }
 
 export const getCurrentLocale = () => {
-    if (navigator.languages !== undefined && navigator.language !== null)
-        return navigator.languages[0];
-    return navigator.language;
+    return new Intl.NumberFormat().resolvedOptions().locale;
 }
 
-/**
- * Parse a localized number to a float.
- * @param {string} stringNumber - the localized number
- * @param {string} locale - [optional] the locale that the number is represented in. Omit this parameter to use the current locale.
- */
-export const parseLocaleNumber: (stringNumber: string, locale: string) => number = function (stringNumber: string, locale: string = getCurrentLocale()) {
-    var thousandSeparator = Intl.NumberFormat(locale).format(11111).replace(/\p{Number}/gu, '');
-    var decimalSeparator = Intl.NumberFormat(locale).format(1.1).replace(/\p{Number}/gu, '');
 
-    return parseFloat(stringNumber
-        .replace(new RegExp('\\' + thousandSeparator, 'g'), '')
-        .replace(new RegExp('\\' + decimalSeparator), '.')
-    );
+const emptyValue = { value: '' };
+
+export class LocalizedNumberParser {
+    private _group: RegExp;
+    private _decimal: RegExp;
+    private _numeral: RegExp;
+    private _index: (numeralGroup: string) => string;
+
+    constructor(locale?: string) {
+        const parts = new Intl.NumberFormat(locale).formatToParts(12345.6);
+        const numerals = [
+            ...new Intl.NumberFormat(locale, { useGrouping: false }).format(9876543210),
+        ].reverse();
+        const index = new Map(numerals.map((d, i) => [d, i]));
+        this._group = new RegExp(
+            `[${(parts.find((d) => d.type === 'group') ?? emptyValue).value}]`,
+            'g',
+        );
+        this._decimal = new RegExp(
+            `[${(parts.find((d) => d.type === 'decimal') ?? emptyValue).value}]`,
+        );
+        this._numeral = new RegExp(`[${numerals.join('')}]`, 'g');
+        this._index = (numeralGroup: string) => (index.get(numeralGroup) ?? -1).toString();
+    }
+
+    parse(localizedString: string): number {
+        const numericString = localizedString
+            .trim()
+            .replace(this._group, '')
+            .replace(this._decimal, '.')
+            .replace(this._numeral, this._index);
+
+        return numericString ? Number(numericString) : NaN;
+    }
 }
