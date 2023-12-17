@@ -35,8 +35,8 @@ export const CostsSaved: React.FunctionComponent<ICostsSavedProps> = (props: Rea
 
 
                 <div style={{ display: 'flex', width: "100%", flexWrap: "wrap" }}>
-                    <Slider styles={{ root: { flexGrow: 1, minWidth: 200 } }} value={SystemLifetime} step={1} onChange={val => SetSystemLifetime(val)} label='System life time (years)' min={1} max={15} />
-                    <TextField styles={{ root: { flexGrow: 1, minWidth: 200 } }} type='number' value={NumberOfEmployees as any as string} label='Number of employees' onChange={(_, val) => SetNumberOfEmployees(parseInt(val as string))} />
+                    <Slider styles={{ root: { flexGrow: 1, minWidth: 250 } }} value={SystemLifetime} step={1} onChange={val => SetSystemLifetime(val)} label='System life time (years)' min={1} max={15} />
+                    <TextField styles={{ root: { flexGrow: 1, minWidth: 250 } }} type='number' value={NumberOfEmployees as any as string} label='Number of employees' onChange={(_, val) => SetNumberOfEmployees(parseInt(val as string))} />
                 </div>
 
                 <div style={{ display: 'flex', margin: "10px" }}>
