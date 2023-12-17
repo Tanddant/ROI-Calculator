@@ -45,6 +45,7 @@ const App: React.FunctionComponent<IAppProps> = (props: React.PropsWithChildren<
             className='HideOnDesktop'
             onLinkClick={(item) => { SetViewKey(item?.props.itemKey as NavigationKey) }}
             overflowBehavior='menu'
+            selectedKey={ViewKey as string}
           >
             {Navigation.links.map(item => <PivotItem headerText={item.name} itemKey={item.key} key={item.key} />)}
           </Pivot>
