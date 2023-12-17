@@ -27,6 +27,10 @@ body {
   display: flex;
 }
 
+.HideOnDesktop {
+  display: none;
+}
+
 @media (max-aspect-ratio: 3/4) {
   .App-content {
     flex-direction: column;
@@ -35,14 +39,39 @@ body {
   .HideOnMobile {
     display: none;
   }
+
+  .HideOnDesktop {
+    display: block;
+  }
 }
 
 @media (min-aspect-ratio: 4/3) {
   .Nav {
     max-width: 280px;
   }
+}
 
-  .HideOnDesktop {
-    display: none;
-  }
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 18px;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 6px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  background-color: #a2eaff80;
+  -webkit-border-radius: 7px;
+  -webkit-box-shadow: inset -1px -1px 0px #00000005, inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
 }

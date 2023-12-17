@@ -35,6 +35,10 @@ export const Home: React.FunctionComponent<IHomeProps> = (props: React.PropsWith
                 <br />
                 <br />
                 <Text variant='large'>I hope you find some use in the tools<br />- Dan 👋</Text>
+
+                <br />
+                <br />
+                <Text variant='small'>PS - Beware that I'm just a dumb developer, not a financial advisor, so take everything here with a grain of salt</Text>
             </div>
         </>
     );
