@@ -1,7 +1,12 @@
+.TableWrapper {
+    font-size: 1.25rem;
+    display: flex;
+    margin: 10px;
+}
+
 .Table {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    font-size: .75em;
 }
 
 

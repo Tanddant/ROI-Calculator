@@ -24,6 +24,7 @@ export const BreakevenCalculator: React.FunctionComponent<IBreakevenCalculatorPr
 
             <Text variant='xLarge'>Breakeven calculator</Text>
             <br />
+            <br />
             <Text>Let's say you're considering giving your employees a Microsoft Copilot license, you would want to know when you can expect that license cost to breakeven, that's exactly what this tool will help you with!</Text>
             <br />
             <hr />
@@ -31,8 +32,8 @@ export const BreakevenCalculator: React.FunctionComponent<IBreakevenCalculatorPr
             <br />
             <br />
 
-            <div style={{maxWidth: 960}}>
-                <FormattedNumberField label='Price/month' type='number' currentValue={BreakevenCost} onValueChanged={val => SetBreakevenCost(val)} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
+            <div style={{ maxWidth: 960 }}>
+                <FormattedNumberField label='Price/month' currentValue={BreakevenCost} onValueChanged={val => SetBreakevenCost(val)} suffix={getCurrencySymbol(getCurrentLocale(), Currency)} />
                 <br />
                 <Text>
                     Employee info:
@@ -46,7 +47,7 @@ export const BreakevenCalculator: React.FunctionComponent<IBreakevenCalculatorPr
                 </Text>
 
                 <br />
-                <Text variant='xLarge'>Breakeven point: {hoursToPrettyString((BreakevenCost / employeeHourlyCost))}</Text>
+                <Text styles={{root: {fontSize: "1.5rem", fontWeight: "bold"}}}>Breakeven point: <span style={{ borderBottom: "3px double" }}>{hoursToPrettyString((BreakevenCost / employeeHourlyCost))}</span></Text>
                 <br />
                 <br />
                 <Text variant='small'>Full credit for the idea behind this calculator goes to <Link href='https://twitter.com/ChrisO_Brien' target='_blank'>Chris O'Brien</Link></Text>

@@ -14,15 +14,16 @@ export const TimeSaved: React.FunctionComponent<ITimeSavedProps> = (props: React
 
             <Text variant='xLarge'>The inspiration</Text>
             <br />
+            <br />
             <Text>The original idea for this site stems from an very old xkcd meme that I would often refer to when thinking about building a script to automate a task, and I wanted everyone to be able to enjoy that, so here's a recreation!</Text>
             <br />
-            <hr/>
+            <hr />
 
             <Text>How long can you work on making a routine task more efficient before you're spending more time than you save?</Text>
             <br />
             <br />
 
-            <div style={{ display: 'flex', margin: "10px" }}>
+            <div className='TableWrapper'>
                 <div style={{ textAlign: "center", writingMode: "vertical-lr", transform: "rotate(180deg)" }}> How much time you shave off</div>
                 <div style={{ flexGrow: 1, maxWidth: "100%", overflowX: "auto" }}>
                     <div style={{ textAlign: "center" }}>How often you do the task</div>
